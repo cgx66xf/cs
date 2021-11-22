@@ -1,0 +1,106 @@
+/*
+
+The Game Project
+
+2b - using variables
+
+*/
+
+var floorPos_y;
+
+var gameChar_x;
+var gameChar_y;
+
+var treePos_x;
+var treePos_y;
+
+var canyon;
+var collectable;
+
+var mountain;
+var cloud;
+
+
+function setup()
+{
+	createCanvas(1024, 576);
+	floorPos_y = 432; //NB. we are now using a variable for the floor position
+
+	//NB. We are now using the built in variables height and width
+	gameChar_x = width/2;
+	gameChar_y = floorPos_y;
+
+	treePos_x = width/2;
+	treePos_y = height/2;
+
+	canyon= {x_pos: 30, width: 100};
+
+	collectable= {x_pos: 200, y_pos: 400, size: 10};
+
+	mountain= {x_pos: 10, y_pos: floorPos_y, size: 1}
+	cloud= {x_pos: 200, y_pos: 100, size: 10}
+}
+
+function draw()
+{
+	background(100, 155, 255); //fill the sky blue
+
+	noStroke();
+	fill(0, 155, 0);
+	rect(0, floorPos_y, height, width - floorPos_y); //draw some green ground
+
+	//draw the mountain
+	fill(150,113,23)
+	triangle(mountain.x_pos,mountain.y_pos,mountain.x_pos+40,mountain.y_pos-50,mountain.x_pos+100,mountain.y_pos)
+	triangle(mountain.x_pos+50,mountain.y_pos,mountain.x_pos+90,mountain.y_pos-50,mountain.x_pos+150,mountain.y_pos)
+
+	//draw the cloud
+	fill(255)
+	ellipse(cloud.x_pos,cloud.y_pos,14*cloud.size,8*cloud.size)
+	fill(248)
+	ellipse(cloud.x_pos+50,cloud.y_pos,14*cloud.size,9*cloud.size)
+
+
+	//draw the tree
+	fill(139,69,19);
+	rect(treePos_x,treePos_y-5,40,150);
+	fill(100,120,50);
+	triangle(treePos_x-50,treePos_y,treePos_x+20,treePos_y-90,treePos_x+80,treePos_y);
+
+
+	//draw the canyon
+	fill(244,164,96);
+	rect(canyon.x_pos,470,canyon.width,100);
+	fill(205,133,63);
+	ellipse(canyon.x_pos+canyon.width/2,470,canyon.width,25);
+
+
+
+	//draw the collectible
+	fill(229,228,226);
+	rect(collectable.x_pos,collectable.y_pos,7*collectable.size,4*collectable.size); 
+	fill(255,215,0);
+	rect(collectable.x_pos+1*collectable.size,collectable.y_pos+1/2*collectable.size,5*collectable.size,3*collectable.size,10);
+
+
+	//draw the game char
+	fill(200);
+	ellipse(gameChar_x,gameChar_y-14,40,40);
+	ellipse(gameChar_x,gameChar_y-48,25,25);
+	fill(0);
+	ellipse(gameChar_x-4,gameChar_y-52,4,4);
+	ellipse(gameChar_x+4,gameChar_y-52,4,4);
+	ellipse(gameChar_x,gameChar_y-22,5,5);
+	ellipse(gameChar_x,gameChar_y-13,5,5);
+	fill(255,140,0);
+	ellipse(gameChar_x,gameChar_y-46,4,4);
+	fill(255,0,0);
+	rect(gameChar_x-15,gameChar_y-40,30,10,10);
+	rect(gameChar_x+5,gameChar_y-40,10,30,10);
+}
+
+function mousePressed()
+{
+	gameChar_x= mouseX;
+	gameChar_y= mouseY;
+}
