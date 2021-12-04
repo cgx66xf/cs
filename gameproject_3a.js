@@ -190,6 +190,11 @@ function keyPressed()
 		if(gameChar_y == floorPos_y)
 		{
 			gameChar_y -= 100;
+			console.log("space bar is pressed")
+		}
+		else
+		{
+			console.log("space key is pressed but gameChar_y != floorPos_y")
 		}
 	}
 	// keys are pressed.
