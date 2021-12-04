@@ -1,11 +1,7 @@
 /*
-
 The Game Project
-
 Week 3
-
 Game interaction
-
 */
 
 
@@ -160,11 +156,17 @@ function draw()
 	//Put conditional statements to move the game character below here
 	if(isLeft == true)
 	{
-		gameChar_x -= 5
+		gameChar_x -= 5;
 	}
 	else if(isRight == true)
 	{
-		gameChar_x += 5
+		gameChar_x += 5;
+	}
+
+	//gravity
+	if(gameChar_y < floorPos_y)
+	{
+		gameChar_y += 5;
 	}
 
 }
@@ -182,6 +184,13 @@ function keyPressed()
 	{
 		isRight= true;
 		console.log("right arrow pressed");
+	}
+	else if(keyCode == 32)
+	{
+		if(gameChar_y == floorPos_y)
+		{
+			gameChar_y -= 100;
+		}
 	}
 	// keys are pressed.
 
@@ -203,6 +212,7 @@ function keyReleased()
 		isRight= false;
 		console.log("right arrow released");
 	}
+
 	// keys are released.
 
 	console.log("keyReleased: " + key);
