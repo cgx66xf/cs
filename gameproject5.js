@@ -19,7 +19,6 @@ var clouds;
 var mountains;
 var collectables;
 var canyons;
-var onCanyon;
 
 function setup()
 {
@@ -393,9 +392,10 @@ function drawCanyon(t_canyon)
 
 function checkCanyon(t_canyon)
 {
-	if(gameChar_world_x > t_canyon.x_pos && gameChar_world_x < t_canyon.x_pos + t_canyon.width)
+	if(gameChar_world_x > t_canyon.x_pos && gameChar_world_x < t_canyon.x_pos + t_canyon.width && gameChar_y == floorPos_y)
 	{
-		console.log("You are on a canyon");
+		console.log("You are plumetting");
+		isPlummeting= true;
 	}
 
 }
@@ -424,3 +424,4 @@ function checkCollectable(t_collectable)
 		console.log("collectable.x_pos: "+ t_collectable.x_pos+ "is found gamecharx loc:"+ gameChar_x);
 	}
 }
+
