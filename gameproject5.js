@@ -73,7 +73,7 @@ function setup()
 
 	canyons= [
 		{x_pos: 100, width: 150},
-		{x_pos: 500, width: 150},
+		{x_pos: 600, width: 150},
 		{x_pos: 900, width: 150},
 		{x_pos: 1400, width: 150},
 		{x_pos: 2100, width: 150},
@@ -161,6 +161,11 @@ function draw()
 	else
 	{
 		isFalling= false;
+	}
+	if(isPlummeting == true)
+	{
+		isFalling= false;
+		gameChar_y += 10;
 	}
 
 	// Update real position of gameChar for collision detection.
