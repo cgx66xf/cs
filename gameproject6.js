@@ -143,10 +143,6 @@ function draw()
 }
 
 
-// ---------------------
-// Key control functions
-// ---------------------
-
 function keyPressed()
 {
 
@@ -189,10 +185,6 @@ function keyReleased()
 	}
 }
 
-
-// ------------------------------
-// Game character render function
-// ------------------------------
 
 // Function to draw the game character.
 
@@ -310,9 +302,6 @@ function drawGameChar()
 	}
 }
 
-// ---------------------------
-// Background render functions
-// ---------------------------
 
 // Function to draw cloud objects.
 function drawClouds()
@@ -351,10 +340,6 @@ function drawTrees()
 }
 
 
-// ---------------------------------
-// Canyon render and check functions
-// ---------------------------------
-
 // Function to draw canyon objects.
 
 function drawCanyon(t_canyon)
@@ -375,9 +360,6 @@ function checkCanyon(t_canyon)
 
 }
 
-// ----------------------------------
-// Collectable items render and check functions
-// ----------------------------------
 
 // Function to draw collectable objects.
 
