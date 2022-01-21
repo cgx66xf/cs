@@ -84,6 +84,18 @@ function draw()
     //lives
     checkPlayerDie();
 
+    if(lives < 1)
+    {
+        textSize(30);
+        text("GAME OVER!",width/2, height/2);
+    }
+
+    if(flagpole.isReached ==1)
+    {
+        textSize(30);
+        text("Flag reached!", width/2, height/2);
+    }
+
 
 	// Logic to make the game character move or the background scroll.
 	if(isLeft)
@@ -427,8 +439,6 @@ function checkPlayerDie()
     {
         fill(255,0,0);
         ellipse(width-130 + i*40, 20, 30, 30);
-        
-
     }
     console.log("lives: ", lives);
 }
