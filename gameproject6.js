@@ -15,73 +15,14 @@ var collectables;
 var canyons;
 var game_score;
 var flagpole;
+var lives;
 
 function setup()
 {
 	createCanvas(1024, 576);
 	floorPos_y = height * 3/4;
-	gameChar_x = width/2;
-	gameChar_y = floorPos_y;
-
-	// Variable to control the background scrolling.
-	scrollPos = 0;
-
-	// Variable to store the real position of the gameChar in the game
-	// world. Needed for collision detection.
-	gameChar_world_x = gameChar_x - scrollPos;
-
-	// Boolean variables to control the movement of the game character.
-	isLeft = false;
-	isRight = false;
-	isFalling = false;
-	isPlummeting = false;
-
-	// Initialise arrays of scenery objects.
-	trees_x= [100,300,600,1200,1600,2000,2150,2900,3100,3500,4000,4200,4400];
-
-	collectables= [
-		{x_pos: 200, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 400, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 1700, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 2100, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 4000, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 2750, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 4800, y_pos: 400, size: 10, isfound: false}];
-
-	clouds= [
-		{x_pos: 200, y_pos: 100, size: 10},
-		{x_pos: 600, y_pos: 100, size: 10},
-		{x_pos: 800, y_pos: 100, size: 10},
-		{x_pos: 1200, y_pos: 100, size: 10},
-		{x_pos: 2000, y_pos: 100, size: 10},
-		{x_pos: 2400, y_pos: 100, size: 10},
-		{x_pos: 3100, y_pos: 100, size: 10}];
-
-	
-	mountains= [
-		{x_pos: 400, y_pos: floorPos_y, size: 1},
-		{x_pos: 700, y_pos: floorPos_y, size: 1},
-		{x_pos: 1000, y_pos: floorPos_y, size: 1},
-		{x_pos: 1300, y_pos: floorPos_y, size: 1},
-		{x_pos: 2100, y_pos: floorPos_y, size: 1},
-		{x_pos: 3000, y_pos: floorPos_y, size: 1},
-		{x_pos: 4100, y_pos: floorPos_y, size: 1}];
-
-	canyons= [
-		{x_pos: 100, width: 150},
-		{x_pos: 600, width: 150},
-		{x_pos: 900, width: 150},
-		{x_pos: 1400, width: 150},
-		{x_pos: 2100, width: 150},
-		{x_pos: 2400, width: 150},
-		{x_pos: 3000, width: 150},
-		{x_pos: 3400, width: 150}];
-
-    game_score= 0;
-
-    flagpole= {x_pos: 5000, isReached: false};
-
-	
+    lives= 3;
+    startGame();
 }
 
 function draw()
@@ -139,6 +80,9 @@ function draw()
     fill(255);
     noStroke();
     text("Score: "+ game_score, 20, 20);
+
+    //lives
+    checkPlayerDie();
 
 
 	// Logic to make the game character move or the background scroll.
@@ -466,4 +410,90 @@ function checkflagpole()
     {
         flagpole.isReached= true;
     }
+}
+
+function checkPlayerDie()
+{
+    if(gameChar_y > floorPos_y + 500)
+    {
+        lives -= 1;
+        console.log("lives: ", lives);
+    }
+    if(lives == 0)
+    {
+        startGame();
+    }
+    for(i=0; i <lives; i++)
+    {
+        fill(255,0,0);
+        ellipse(width-130 + i*40, 20, 30, 30);
+        
+
+    }
+    console.log("lives: ", lives);
+}
+
+function startGame()
+{
+    gameChar_x = width/2;
+	gameChar_y = floorPos_y;
+
+	// Variable to control the background scrolling.
+	scrollPos = 0;
+
+	// Variable to store the real position of the gameChar in the game
+	// world. Needed for collision detection.
+	gameChar_world_x = gameChar_x - scrollPos;
+
+	// Boolean variables to control the movement of the game character.
+	isLeft = false;
+	isRight = false;
+	isFalling = false;
+	isPlummeting = false;
+
+	// Initialise arrays of scenery objects.
+	trees_x= [100,300,600,1200,1600,2000,2150,2900,3100,3500,4000,4200,4400];
+
+	collectables= [
+		{x_pos: 200, y_pos: 400, size: 10, isFound: false},
+		{x_pos: 400, y_pos: 400, size: 10, isFound: false},
+		{x_pos: 1700, y_pos: 400, size: 10, isFound: false},
+		{x_pos: 2100, y_pos: 400, size: 10, isFound: false},
+		{x_pos: 4000, y_pos: 400, size: 10, isFound: false},
+		{x_pos: 2750, y_pos: 400, size: 10, isFound: false},
+		{x_pos: 4800, y_pos: 400, size: 10, isfound: false}];
+
+	clouds= [
+		{x_pos: 200, y_pos: 100, size: 10},
+		{x_pos: 600, y_pos: 100, size: 10},
+		{x_pos: 800, y_pos: 100, size: 10},
+		{x_pos: 1200, y_pos: 100, size: 10},
+		{x_pos: 2000, y_pos: 100, size: 10},
+		{x_pos: 2400, y_pos: 100, size: 10},
+		{x_pos: 3100, y_pos: 100, size: 10}];
+
+	
+	mountains= [
+		{x_pos: 400, y_pos: floorPos_y, size: 1},
+		{x_pos: 700, y_pos: floorPos_y, size: 1},
+		{x_pos: 1000, y_pos: floorPos_y, size: 1},
+		{x_pos: 1300, y_pos: floorPos_y, size: 1},
+		{x_pos: 2100, y_pos: floorPos_y, size: 1},
+		{x_pos: 3000, y_pos: floorPos_y, size: 1},
+		{x_pos: 4100, y_pos: floorPos_y, size: 1}];
+
+	canyons= [
+		{x_pos: 100, width: 150},
+		{x_pos: 600, width: 150},
+		{x_pos: 900, width: 150},
+		{x_pos: 1400, width: 150},
+		{x_pos: 2100, width: 150},
+		{x_pos: 2400, width: 150},
+		{x_pos: 3000, width: 150},
+		{x_pos: 3400, width: 150}];
+
+    game_score= 0;
+
+    flagpole= {x_pos: 5000, isReached: false};
+
 }
