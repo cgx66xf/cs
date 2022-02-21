@@ -412,6 +412,11 @@ function checkPlayerDie()
     {
         lives -= 1;
         console.log("lives: ", lives);
+		//return to starting point
+		gameChar_x = width/2;
+		gameChar_y = floorPos_y;
+		isPlummeting= 0;
+		scrollPos = 0;
     }
     if(lives == 0)
     {
