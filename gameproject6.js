@@ -394,6 +394,10 @@ function drawflagpole()
     }
     else if(flagpole.isReached == true)
     {
+		fill(255);
+        rect(flagpole.x_pos,floorPos_y-100, 15, 100);
+        fill(0,255,0);
+        rect(flagpole.x_pos,floorPos_y-125, 100, 50);
 
     }
 }
