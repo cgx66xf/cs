@@ -137,8 +137,17 @@ function draw()
 	// Logic to make the game character rise and fall.
 	if(gameChar_y < floorPos_y )
 	{
-		gameChar_y += 2;
-		isFalling= true;
+		var isContact= false;
+		for(i= 0; i< platforms.length; i++){
+			if(platforms[i].checkContact(gameChar_world_x, gameChar_y)){
+				isContact= true;
+				break;
+			} 
+		}
+		if(isContact == false){
+			gameChar_y += 2;
+			isFalling= true;
+		}
 	}
 	else
 	{
@@ -506,7 +515,7 @@ function startGame()
 		{x_pos: 3400, width: 150}];
 
     platforms= [];
-	platforms.push(createPlatforms(500, 100, 200));
+	platforms.push(createPlatforms(500, floorPos_y- 100, 200));
 
     flagpole= {x_pos: 5000, isReached: false};
 
@@ -521,7 +530,15 @@ function startGame()
 			draw: function(){
 				fill(255, 0, 255);
 				rect(this.x, this.y, this.length, 20);
-
+			},
+			checkContact: function(gc_x, gc_y){
+				if(gc_x > this.x && gc_x < this.x + this.length){
+					var d= this.y- gc_y;
+					if(d>= 0 && d< 5){
+						return true;
+					}
+				}
+				return false;
 			}
 		};
 		return p;
