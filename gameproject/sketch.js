@@ -8,7 +8,6 @@ var isLeft;
 var isRight;
 var isFalling;
 var isPlummeting;
-
 var trees_x;
 var clouds;
 var mountains;
@@ -16,9 +15,7 @@ var collectables;
 var canyons;
 var game_score;
 var flagpole;
-var platforms;
 var lives;
-var enemies;
 
 function setup()
 {
@@ -72,25 +69,6 @@ function draw()
         checkflagpole();
     }
 
-	for(i= 0; i< enemies.length; i++){
-		enemies[i].draw();
-		var isContact= enemies[i].checkContact(gameChar_world_x, gameChar_y);
-		if(isContact){
-			if(lives > 0){
-				lives -= 1;
-				startGame();
-				break;
-			}
-		}
-
-
-	}
-
-	//Draw platforms
-	for(i=0; i< platforms.length; i++){
-		platforms[i].draw();
-	}
-
 	
     pop();
 
@@ -110,7 +88,6 @@ function draw()
     {
         textSize(30);
         text("GAME OVER!",width/2, height/2);
-		return;
     }
 
     if(flagpole.isReached ==1)
@@ -119,8 +96,6 @@ function draw()
         text("Flag reached!", width/2, height/2);
 		return;
     }
-
-
 
 
 	// Logic to make the game character move or the background scroll.
@@ -151,17 +126,8 @@ function draw()
 	// Logic to make the game character rise and fall.
 	if(gameChar_y < floorPos_y )
 	{
-		var isContact= false;
-		for(i= 0; i< platforms.length; i++){
-			if(platforms[i].checkContact(gameChar_world_x, gameChar_y)){
-				isContact= true;
-				break;
-			} 
-		}
-		if(isContact == false){
-			gameChar_y += 2;
-			isFalling= true;
-		}
+		gameChar_y += 2;
+		isFalling= true;
 	}
 	else
 	{
@@ -445,7 +411,6 @@ function checkflagpole()
     }
 }
 
-
 function checkPlayerDie()
 {
     if(gameChar_y > floorPos_y + 500)
@@ -468,42 +433,6 @@ function checkPlayerDie()
         ellipse(width-130 + i*40, 20, 30, 30);
     }
     console.log("lives: ", lives);
-}
-
-function Enemy(x, y, range)
-{
-	this.x= x;
-	this.y= y;
-	this.range= range;
-
-	this.current_x= x;
-	this.inc= 1;
-
-	this.update= function(){
-		this.current_x += this.inc;
-		if(this.current_x >= this.x+ this.range){
-			this.inc= -1;
-		}
-		
-		else if(this.current_x < this.x){
-			this.inc= +1;
-		}
-	}
-
-	this.draw= function(){
-		this.update();
-		fill(255, 0, 0);
-		ellipse(this.current_x, this.y, 25, 25);
-
-	}
-
-	this.checkContact= function(gc_x, gc_y){
-		var d= dist(gc_x, gc_y, this.current_x, this.y)
-		if(d< 20){
-			return true;
-		}
-		return false;
-	}
 }
 
 function startGame()
@@ -565,37 +494,8 @@ function startGame()
 		{x_pos: 3000, width: 150},
 		{x_pos: 3400, width: 150}];
 
-    platforms= [];
-	platforms.push(createPlatforms(500, floorPos_y- 100, 200));
-
-	enemies= [];
-	enemies.push(new Enemy(300, floorPos_y- 10, 100));
+    game_score= 0;
 
     flagpole= {x_pos: 5000, isReached: false};
-
-	game_score= 0;
-
-	function createPlatforms(x, y, length)
-	{
-		var p= {
-			x: x,
-			y: y,
-			length: length,
-			draw: function(){
-				fill(255, 0, 255);
-				rect(this.x, this.y, this.length, 20);
-			},
-			checkContact: function(gc_x, gc_y){
-				if(gc_x > this.x && gc_x < this.x + this.length){
-					var d= this.y- gc_y;
-					if(d>= 0 && d< 5){
-						return true;
-					}
-				}
-				return false;
-			}
-		};
-		return p;
-	}
 
 }
