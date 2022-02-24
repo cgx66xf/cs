@@ -17,6 +17,17 @@ var game_score;
 var flagpole;
 var lives;
 
+var jumpSound;
+
+
+function preload()
+{
+	soundFormats('mp3', 'wav');
+	jumpSound= loadSound('assets/jumpsound.mp3');
+	fallSound= loadSound('assets/fallsound.mp3');
+	collectSound= loadSound('assets/collectsound.mp3');
+}
+
 function setup()
 {
 	createCanvas(1024, 576);
