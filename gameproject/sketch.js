@@ -18,14 +18,18 @@ var flagpole;
 var lives;
 
 var jumpSound;
+var fallSound;
+var collectSound;
+var winSound;
 
 
 function preload()
 {
-	soundFormats('mp3', 'wav');
+	soundFormats('mp3');
 	jumpSound= loadSound('assets/jumpsound.mp3');
 	fallSound= loadSound('assets/fallsound.mp3');
 	collectSound= loadSound('assets/collectsound.mp3');
+	winSound= loadSound('assets/winsound.mp3');
 }
 
 function setup()
@@ -173,7 +177,9 @@ function keyPressed()
 		if(gameChar_y == floorPos_y)
 		{
 			gameChar_y -= 100;
-			console.log("space bar is pressed")
+			console.log("space bar is pressed");
+			//code to play jumpsound when jumped
+			jumpSound.play();
 		}
 		else
 		{
@@ -366,8 +372,9 @@ function checkCanyon(t_canyon)
 {
 	if(gameChar_world_x > t_canyon.x_pos && gameChar_world_x < t_canyon.x_pos + t_canyon.width && gameChar_y == floorPos_y)
 	{
-		console.log("You are plumetting");
 		isPlummeting= true;
+		fallSound.play('','','','',2);
+		console.log("You are plumetting");
 	}
 
 }
@@ -392,6 +399,7 @@ function checkCollectable(t_collectable)
 		t_collectable.isFound= true;
 		console.log("collectable.x_pos: "+ t_collectable.x_pos+ "is found gamecharx loc:"+ gameChar_x);
         game_score += 1;
+		collectSound.play();
 	}
 }
 
@@ -419,6 +427,8 @@ function checkflagpole()
     if(dist(gameChar_world_x, gameChar_y, flagpole.x_pos, floorPos_y) < 70)
     {
         flagpole.isReached= true;
+		//play winsound
+		winSound.play();
     }
 }
 
@@ -465,11 +475,9 @@ function startGame()
 	isPlummeting = false;
 
 	// Initialise arrays of scenery objects.
-	trees_x= [100,300,600,1200,1600,2000,2150,2900,3100,3500,4000,4200,4400];
+	trees_x= [100,300,1200,1600,2000,2150,2900,3100,3500,4000,4200,4400];
 
 	collectables= [
-		{x_pos: 200, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 400, y_pos: 400, size: 10, isFound: false},
 		{x_pos: 1700, y_pos: 400, size: 10, isFound: false},
 		{x_pos: 2100, y_pos: 400, size: 10, isFound: false},
 		{x_pos: 4000, y_pos: 400, size: 10, isFound: false},
@@ -496,7 +504,6 @@ function startGame()
 		{x_pos: 4100, y_pos: floorPos_y, size: 1}];
 
 	canyons= [
-		{x_pos: 100, width: 150},
 		{x_pos: 600, width: 150},
 		{x_pos: 900, width: 150},
 		{x_pos: 1400, width: 150},
