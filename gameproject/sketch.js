@@ -156,6 +156,7 @@ function draw()
 
 	// Update real position of gameChar for collision detection.
 	gameChar_world_x = gameChar_x - scrollPos;
+	console.log(gameChar_world_x);
 }
 
 
@@ -362,7 +363,7 @@ function drawTrees()
 
 function drawCanyon(t_canyon)
 {
-	fill(180,100,10);
+	fill(100, 155, 255);
 	rect(t_canyon.x_pos,floorPos_y,t_canyon.width,145);
 }
 
@@ -453,7 +454,6 @@ function checkPlayerDie()
         fill(255,0,0);
         ellipse(width-130 + i*40, 20, 30, 30);
     }
-    console.log("lives: ", lives);
 }
 
 function startGame()
@@ -475,9 +475,10 @@ function startGame()
 	isPlummeting = false;
 
 	// Initialise arrays of scenery objects.
-	trees_x= [100,300,1200,1600,2000,2150,2900,3100,3500,4000,4200,4400];
+	trees_x= [100,300,1100,1600,2000,2150,2900,3100,3500,4000,4200,4400];
 
 	collectables= [
+		{x_pos: 820, y_pos: 390, size: 10, isFound: false},
 		{x_pos: 1700, y_pos: 400, size: 10, isFound: false},
 		{x_pos: 2100, y_pos: 400, size: 10, isFound: false},
 		{x_pos: 4000, y_pos: 400, size: 10, isFound: false},
@@ -496,9 +497,8 @@ function startGame()
 	
 	mountains= [
 		{x_pos: 400, y_pos: floorPos_y, size: 1},
-		{x_pos: 700, y_pos: floorPos_y, size: 1},
-		{x_pos: 1000, y_pos: floorPos_y, size: 1},
-		{x_pos: 1300, y_pos: floorPos_y, size: 1},
+		{x_pos: 1150, y_pos: floorPos_y, size: 1},
+		{x_pos: 1200, y_pos: floorPos_y, size: 1},
 		{x_pos: 2100, y_pos: floorPos_y, size: 1},
 		{x_pos: 3000, y_pos: floorPos_y, size: 1},
 		{x_pos: 4100, y_pos: floorPos_y, size: 1}];
