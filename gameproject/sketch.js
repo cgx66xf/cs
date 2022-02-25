@@ -21,6 +21,7 @@ var jumpSound;
 var fallSound;
 var collectSound;
 var winSound;
+var aliens;
 
 
 function preload()
@@ -75,6 +76,11 @@ function draw()
 			drawCollectable(collectables[i]);
             checkCollectable(collectables[i]);
 		}
+	}
+
+	for(var i=0; i< aliens.length; i++)
+	{
+		aliens[i].draw();
 	}
 
     //Draw flagpole.
@@ -339,9 +345,11 @@ function drawMountain()
 {
 	for (var i= 0; i < mountains.length; i++)
 	{
-		fill(150,113,23)
-		triangle(mountains[i].x_pos,mountains[i].y_pos,mountains[i].x_pos+40,mountains[i].y_pos-50,mountains[i].x_pos+100,mountains[i].y_pos)
-		triangle(mountains[i].x_pos+50,mountains[i].y_pos,mountains[i].x_pos+90,mountains[i].y_pos-50,mountains[i].x_pos+150,mountains[i].y_pos)
+		fill(96,96,96);
+		triangle(mountains[i].x_pos,mountains[i].y_pos,mountains[i].x_pos+40*mountains[i].size,mountains[i].y_pos-50*mountains[i].size,mountains[i].x_pos+100*mountains[i].size,mountains[i].y_pos);
+		triangle(mountains[i].x_pos+50*mountains[i].size,mountains[i].y_pos,mountains[i].x_pos+90*mountains[i].size,mountains[i].y_pos-50*mountains[i].size,mountains[i].x_pos+150*mountains[i].size,mountains[i].y_pos);
+		fill(200,200,200);
+		triangle(mountains[i].x_pos+20*mountains[i].size,mountains[i].y_pos-25*mountains[i].size,mountains[i].x_pos+40*mountains[i].size,mountains[i].y_pos-50*mountains[i].size,mountains[i].x_pos+70*mountains[i].size,mountains[i].y_pos-25*mountains[i].size)
 	}
 
 }
@@ -365,6 +373,9 @@ function drawCanyon(t_canyon)
 {
 	fill(100, 155, 255);
 	rect(t_canyon.x_pos,floorPos_y,t_canyon.width,145);
+	fill(0, 155, 0);
+	triangle(t_canyon.x_pos,floorPos_y,t_canyon.x_pos+15,floorPos_y+50,t_canyon.x_pos, floorPos_y+150);
+	triangle(t_canyon.x_pos+t_canyon.width,floorPos_y,t_canyon.x_pos+t_canyon.width-15,floorPos_y+100,t_canyon.x_pos+t_canyon.width, floorPos_y+150);
 }
 
 // Function to check character is over a canyon.
@@ -456,6 +467,50 @@ function checkPlayerDie()
     }
 }
 
+function Alien(x, y, range)
+{
+	this.x= x;
+	this.y= y;
+	this.range= range;
+
+	this.current_x= x;
+	this.inc= 1;
+
+	this.update= function(){
+		this.current_x += this.inc;
+		if(this.current_x >= this.x+ this.range){
+			this.inc= -1;
+		}
+		
+		else if(this.current_x < this.x){
+			this.inc= +1;
+		}
+	}
+
+	this.draw= function(){
+		this.update();
+		fill(0,255,128);
+		ellipse(this.current_x+50, this.y, 60, 60);
+		fill(160,160,160);
+		rect(this.current_x, this.y, 100,30);
+		ellipse(this.current_x, this.y+ 15, 30, 30);
+		ellipse(this.current_x+100, this.y+ 15, 30, 30);
+		fill(255,255,51);
+		ellipse(this.current_x+ 7.5,this.y+ 15, 15, 15);
+		ellipse(this.current_x+ 50,this.y+ 15, 15, 15);
+		ellipse(this.current_x+ 92.5,this.y+ 15, 15, 15);
+
+	}
+
+	this.checkContact= function(gc_x, gc_y){
+		var d= dist(gc_x, gc_y, this.current_x, this.y)
+		if(d< 20){
+			return true;
+		}
+		return false;
+	}
+}
+
 function startGame()
 {
     gameChar_x = width/2;
@@ -475,12 +530,12 @@ function startGame()
 	isPlummeting = false;
 
 	// Initialise arrays of scenery objects.
-	trees_x= [100,300,1100,1600,2000,2150,2900,3100,3500,4000,4200,4400];
+	trees_x= [100,300,1100,131600,2000,2250,2900,3250,3650,4000,4200,4700];
 
 	collectables= [
 		{x_pos: 820, y_pos: 390, size: 10, isFound: false},
 		{x_pos: 1700, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 2100, y_pos: 400, size: 10, isFound: false},
+		{x_pos: 2000, y_pos: 400, size: 10, isFound: false},
 		{x_pos: 4000, y_pos: 400, size: 10, isFound: false},
 		{x_pos: 2750, y_pos: 400, size: 10, isFound: false},
 		{x_pos: 4800, y_pos: 400, size: 10, isfound: false}];
@@ -496,12 +551,10 @@ function startGame()
 
 	
 	mountains= [
-		{x_pos: 400, y_pos: floorPos_y, size: 1},
-		{x_pos: 1150, y_pos: floorPos_y, size: 1},
-		{x_pos: 1200, y_pos: floorPos_y, size: 1},
-		{x_pos: 2100, y_pos: floorPos_y, size: 1},
-		{x_pos: 3000, y_pos: floorPos_y, size: 1},
-		{x_pos: 4100, y_pos: floorPos_y, size: 1}];
+		{x_pos: 100, y_pos: floorPos_y, size: 3},
+		{x_pos: 1600, y_pos: floorPos_y, size: 3},
+		{x_pos: 3600, y_pos: floorPos_y, size: 3},
+		{x_pos: 4300, y_pos: floorPos_y, size: 3}];
 
 	canyons= [
 		{x_pos: 600, width: 150},
@@ -511,6 +564,9 @@ function startGame()
 		{x_pos: 2400, width: 150},
 		{x_pos: 3000, width: 150},
 		{x_pos: 3400, width: 150}];
+
+	aliens= [];
+	aliens.push(new Alien(500, 150, 1000));
 
     game_score= 0;
 
