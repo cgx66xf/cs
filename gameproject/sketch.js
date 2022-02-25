@@ -1,3 +1,12 @@
+/*
+Game project submission of Taner Paker
+I choosed sound as an extension because i had already built platforms and enemies during the lectures, from what i learned at the enemies lecture i used it to build an alien spaceship as a background object.
+Most of the sounds i used are from the game Mario but i have also added a copyright-free sound aswell.
+I got to play with html to load the p5.sound.js file and it was my first time touching html so it was quite exciting :)
+What i found difficult about the sound extension is that i was going to add a game over sound but because of the startgame() function after the execution of the bit of code that make the sound play it would cause a loop and crash my computer.
+I tried adding the .play() method after the start game function and before it so it doesnt make the sound cause a loop but all of my attempts were unsuccessfull so i couldnt implement a gameover sound when all lives are consumed.
+Some of the functions have really long arguments ex:The triangles at drawMountain() i kept some of the functions as a one liner by choice to not scramble them into new lines.
+*/
 var gameChar_x;
 var gameChar_y;
 var floorPos_y;
@@ -190,7 +199,7 @@ function keyPressed()
 		}
 		else
 		{
-			console.log("space key is pressed but gameChar_y != floorPos_y")
+			console.log("space key is pressed but gameChar_y != floorPos_y");
 		}
 	}
 
@@ -349,7 +358,7 @@ function drawMountain()
 		triangle(mountains[i].x_pos,mountains[i].y_pos,mountains[i].x_pos+40*mountains[i].size,mountains[i].y_pos-50*mountains[i].size,mountains[i].x_pos+100*mountains[i].size,mountains[i].y_pos);
 		triangle(mountains[i].x_pos+50*mountains[i].size,mountains[i].y_pos,mountains[i].x_pos+90*mountains[i].size,mountains[i].y_pos-50*mountains[i].size,mountains[i].x_pos+150*mountains[i].size,mountains[i].y_pos);
 		fill(200,200,200);
-		triangle(mountains[i].x_pos+20*mountains[i].size,mountains[i].y_pos-25*mountains[i].size,mountains[i].x_pos+40*mountains[i].size,mountains[i].y_pos-50*mountains[i].size,mountains[i].x_pos+70*mountains[i].size,mountains[i].y_pos-25*mountains[i].size)
+		triangle(mountains[i].x_pos+20*mountains[i].size,mountains[i].y_pos-25*mountains[i].size,mountains[i].x_pos+40*mountains[i].size,mountains[i].y_pos-50*mountains[i].size,mountains[i].x_pos+70*mountains[i].size,mountains[i].y_pos-25*mountains[i].size);
 	}
 
 }
@@ -488,6 +497,7 @@ function Alien(x, y, range)
 	}
 
 	this.draw= function(){
+		//this draws our alien spaceship note that this is a background object to make the scenery populated 
 		this.update();
 		fill(0,255,128);
 		ellipse(this.current_x+50, this.y, 60, 60);
