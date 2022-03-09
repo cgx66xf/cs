@@ -1,10 +1,12 @@
 /*
 Game project submission of Taner Paker
+Extensions: Sound, Platforms
 I choosed sound as an extension because i had already built platforms and enemies during the lectures, from what i learned at the enemies lecture i used it to build an alien spaceship as a background object.
 Most of the sounds i used are from the game Mario but i have also added a copyright-free sound aswell.
 I got to play with html to load the p5.sound.js file and it was my first time touching html so it was quite exciting :)
 What i found difficult about the sound extension is that i was going to add a game over sound but because of the startgame() function after the execution of the bit of code that make the sound play it would cause a loop and crash my computer.
 I tried adding the .play() method after the start game function and before it so it doesnt make the sound cause a loop but all of my attempts were unsuccessfull so i couldnt implement a gameover sound when all lives are consumed.
+I choosed platforms as an extension because it would make the game mechanics better more so than adding enemies, i had designed the platforms in a way that you wouldnt have to jump on it because you couldnt but Mr.Simon did a webinar and that made me fix it.
 Some of the functions have really long arguments ex:The triangles at drawMountain() i kept some of the functions as a one liner by choice to not scramble them into new lines.
 */
 var gameChar_x;
