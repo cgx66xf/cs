@@ -61,6 +61,11 @@ function draw()
 
 	push();
 	translate(scrollPos, 0); 
+
+	// Draw jump to guide player
+	fill(255,0,0);
+	textSize(30);
+	text("Jump --->", 6500, 200);
   
 	// Draw clouds.
 	drawClouds();
@@ -550,15 +555,17 @@ function startGame()
 	isPlummeting = false;
 
 	// Initialise arrays of scenery objects.
-	trees_x= [100,300,1100,131600,2000,2250,2900,3250,3650,4000,4200,4700];
+	trees_x= [100,300,1100,131600,2000,2250,2900,3250,3650,4000,4200,4700,7200,7700];
 
 	collectables= [
-		{x_pos: 820, y_pos: 390, size: 10, isFound: false},
-		{x_pos: 1700, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 2000, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 4000, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 2750, y_pos: 400, size: 10, isFound: false},
-		{x_pos: 4800, y_pos: 400, size: 10, isfound: false}];
+		{x_pos: 820, y_pos: 395, size: 10, isFound: false},
+		{x_pos: 1700, y_pos: 395, size: 10, isFound: false},
+		{x_pos: 2000, y_pos: 395, size: 10, isFound: false},
+		{x_pos: 4000, y_pos: 395, size: 10, isFound: false},
+		{x_pos: 2750, y_pos: 395, size: 10, isFound: false},
+		{x_pos: 4800, y_pos: 395, size: 10, isFound: false},
+		{x_pos: 5600, y_pos: 395, size: 10, isFound: false},
+		{x_pos: 7100, y_pos: 395, size: 10, isFound: false}];
 
 	clouds= [
 		{x_pos: 200, y_pos: 100, size: 10},
@@ -567,7 +574,10 @@ function startGame()
 		{x_pos: 1200, y_pos: 100, size: 10},
 		{x_pos: 2000, y_pos: 100, size: 10},
 		{x_pos: 2400, y_pos: 100, size: 10},
-		{x_pos: 3100, y_pos: 100, size: 10}];
+		{x_pos: 3100, y_pos: 100, size: 10},
+		{x_pos: 3800, y_pos: 100, size: 10},
+		{x_pos: 4500, y_pos: 100, size: 10},
+		{x_pos: 6500, y_pos: 100, size: 10}];
 
 	
 	mountains= [
@@ -583,17 +593,22 @@ function startGame()
 		{x_pos: 2100, width: 150},
 		{x_pos: 2400, width: 150},
 		{x_pos: 3000, width: 150},
-		{x_pos: 3400, width: 150}];
+		{x_pos: 3400, width: 150},
+		{x_pos: 5100, width: 300},
+		{x_pos: 5900, width: 1000}];
 
 	aliens= [];
 	aliens.push(new Alien(500, 150, 1000));
 
 	platforms= [];
-	platforms.push(createPlatforms(500, floorPos_y- 100, 200));
+	platforms.push(createPlatforms(5050, floorPos_y- 100, 200));
+	platforms.push(createPlatforms(5850, floorPos_y- 100, 350));
+	platforms.push(createPlatforms(6150, floorPos_y- 200, 200));
+	platforms.push(createPlatforms(6400, floorPos_y- 100, 200));
 
     game_score= 0;
 
-    flagpole= {x_pos: 5000, isReached: false};
+    flagpole= {x_pos: 8000, isReached: false};
 
 
 	function createPlatforms(x, y, length)
@@ -603,7 +618,7 @@ function startGame()
 			y: y,
 			length: length,
 			draw: function(){
-				fill(255, 0, 255);
+				fill(140);
 				rect(this.x, this.y, this.length, 20);
 			},
 			checkContact: function(gc_x, gc_y){
