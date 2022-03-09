@@ -158,8 +158,9 @@ function draw()
 		}
 	}
 
+	isFalling= false;
 	// Logic to make the game character rise and fall.
-	if(gameChar_y < floorPos_y )
+	if(gameChar_y < floorPos_y )  
 	{
 		var isContact= false;
 		for(i= 0; i< platforms.length; i++){
@@ -204,16 +205,11 @@ function keyPressed()
 	}
 	else if(keyCode == 32)
 	{
-		if(gameChar_y == floorPos_y)
-		{
+		if(!isFalling && !isPlummeting){
 			gameChar_y -= 100;
 			console.log("space bar is pressed");
 			//code to play jumpsound when jumped
 			jumpSound.play();
-		}
-		else
-		{
-			console.log("space key is pressed but gameChar_y != floorPos_y");
 		}
 	}
 
