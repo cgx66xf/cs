@@ -1,3 +1,5 @@
+Opening Qtcreator:
+./usr/local/Qt/Tools/QtCreator/bin/qtcreator
 -----------main window-----------
 #include "mainwindow.h"
 #include <QApplication> 
