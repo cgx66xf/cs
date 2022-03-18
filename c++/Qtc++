@@ -11,3 +11,27 @@ int main(int argc, char *argv[])
   w.show();
   return a.exec();
 }
+From Qtcreator we created a Empty qmake project
+we right click on the project folder and click add new and choose new c++ source file and name it main.cpp that creates a source file
+A qtgui application mainly uses 2 main libraries core, gui
+In our pro file we write:
+QT += core gui
+
+greaterThan(QT_MAJOR_VERSION, 5) : QT += widgets
+
+SOURCES += \
+  main.cpp
+  -------------Lets go back to the main.cpp file-----------
+#include <QApplication>
+#include <QLabel>
+
+int main(int argc, char* argv[]){
+    QApplication app(argc, argv);
+    QLabel *label= new QLabel("Hello world");
+    label->setWindowTitle("My app");
+    label->resize(400, 400);
+    label->show();
+    app.exec();
+}
+
+  
