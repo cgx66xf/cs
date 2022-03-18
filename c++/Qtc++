@@ -55,9 +55,20 @@ MainWindow::~MainWindow()
 ------------Message box-----------
 We first place a Push button in designer
 Than in designer we right click on the push button and choose go to slot and there we choose the first option clicked()
-That creates this in mainwindow.cpp file
-void  MainWindow::on_pushButton_clicked(){
-  //code
+That creates this in mainwindow.cpp file and dont forget to #include <Qmessagebox>
+void  MainWindow::on_pushButton_clicked()
+{
+  QMessagebox::about(this, "My title", "This is my custom message");
+  //QMessagebox::critical(this, "My title", "This is my custom message");
+  /*QMessagebox::StandardButton reply= QMessageBox::question(this, "My title", "This is my custom message", QMessageBox::Yes | QMessageBox::No);
+    if(reply == QMessageBox::Yes) {
+    QApplication::quit();
+    }else {
+       qDebug() << "No is clicked";  // #include <QDebug>   if you want to use this line 
+    }*/
 }
+//the code above creates a message box when we click the push button
+-----------------
+
 
   
