@@ -33,5 +33,31 @@ int main(int argc, char* argv[]){
     label->show();
     app.exec();
 }
+-------------Signals and slots------------
+After we added the slider and the progressbar in the main file 
+In the mainwindow.cpp file
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), ui->progressBar, SLOT(setValue(int)));
+    disconnect(ui->horizontalSlider, SIGNAL(valueChanged(int)), ui->progressBar, SLOT(setValue(int)));
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+------------Message box-----------
+We first place a Push button in designer
+Than in designer we right click on the push button and choose go to slot and there we choose the first option clicked()
+That creates this in mainwindow.cpp file
+void  MainWindow::on_pushButton_clicked(){
+  //code
+}
 
   
