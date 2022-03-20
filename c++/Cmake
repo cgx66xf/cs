@@ -10,13 +10,41 @@ project(botproject)
 add_executeable(${PROJECT_NAME} main.cpp)   //the project name references the project variable that we have set in line above 
 
 -----------------Libraries and subdirectories---------------
-Suppose we have 2 files in our project: main.cpp, adder.cpp
-
+Suppose we have our file structure:
+Botproject-
+  --Adder
+    adder.cpp
+    adder.h
+    CMakeLists.txt
+  --Out
+    CMakeLists.txt
+    main.cpp
+    
+adder.h contains the definition of functions in adder.cpp:
+float add(float a, float b);
+    
+In the Out/CMakeLists.txt we have:
 cmake_minimum_required(VERSION 3.13.4)
 
 project(botproject)
 
-add_executeable(${PROJECT_NAME} main.cpp adder.cpp)
+add_executeable(${PROJECT_NAME} main.cpp)
+
+add_subdirectory(Adder);
+
+target_include_directories(${PROJECT_NAME} PUBLIC Adder)
+
+target_link_directories(${PROJECT_NAME} Adder)
+
+target_link_libraries(${PROJECT_NAME} adder);
+
+
+In the Adder/CMakeLists.txt we have:
+add_library(adder adder.cpp)
+
+
+-------Episode 3 will have Git Submodules------------
+
 
 
 
