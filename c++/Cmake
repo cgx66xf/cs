@@ -9,6 +9,17 @@ project(botproject)
 
 add_executeable(${PROJECT_NAME} main.cpp)   //the project name references the project variable that we have set in line above 
 
+-----------------Libraries and subdirectories---------------
+Suppose we have 2 files in our project: main.cpp, adder.cpp
+
+cmake_minimum_required(VERSION 3.13.4)
+
+project(botproject)
+
+add_executeable(${PROJECT_NAME} main.cpp adder.cpp)
+
+
+
 
 
 
