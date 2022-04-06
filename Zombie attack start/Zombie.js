@@ -19,4 +19,9 @@ function Zombie(y) {
 		ellipse(this.x, this.y, 50);
 		pop();
 	}
+		//update the zombies x location as it lumbers across the screen
+	this.updateLocation = function() {
+		this.x += this.speed;
+	}
+	
 }
