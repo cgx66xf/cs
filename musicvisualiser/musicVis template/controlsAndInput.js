@@ -62,10 +62,9 @@ function ControlsAndInput(){
 	this.menu = function(){
 		//draw out menu items for each visualisation
 		//???
-		for (i= 0; i< length(Visualisations.visuals); i++)
+		for (i= 0; i< vis.visuals.length; i++)
 		{
-			vis[i];
-
+			text((i+1)+": "+vis.visuals[i].name, 100, 30+(i+1)*30);
 		}
 
 	};
