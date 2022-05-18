@@ -17,7 +17,8 @@ function ControlsAndInput(){
 		}
 		else if (this.playbackButton.hitCheck == false)
 		{
-			fullscreen();
+			let fs= fullscreen();
+			fullscreen(!fs);
 		}
 
 		//check if the playback button has been clicked
